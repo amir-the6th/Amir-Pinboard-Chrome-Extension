@@ -1,38 +1,38 @@
-let myLeads = [];
+let myPins = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myPins"));
 
 if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage;
-    renderLeads();
+    myPins = leadsFromLocalStorage;
+    render(myPins);
 }
 
-inputBtn.addEventListener("click", function() {
-    myLeads.push(inputEl.value)
-    inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    renderLeads()
-})
-
-deleteBtn.addEventListener("dblclick", function() {
-    localStorage.clear()
-    myLeads = []
-    renderLeads()
-})
-
-function renderLeads() {
+function render(pins) {
     let listItems = ""
-    for (let i = 0; i < myLeads.length; i++) {
+    for (let i = 0; i < pins.length; i++) {
         listItems += `
             <li>
-                <a target='_blank' href='https://${myLeads[i]}'>
-                    ${myLeads[i]}
+                <a target='_blank' href='https://${pins[i]}'>
+                    ${pins[i]}
                 </a>
             </li>
         `
     }
-    ulEl.innerHTML = listItems  
+    ulEl.innerHTML = listItems;
 }
+
+inputBtn.addEventListener("click", function() {
+    myPins.push(inputEl.value)
+    inputEl.value = ""
+    localStorage.setItem("myPins", JSON.stringify(myPins));
+    render(myPins)
+})
+
+deleteBtn.addEventListener("dblclick", function() {
+    localStorage.clear()
+    myPins = []
+    render(myPins)
+})
