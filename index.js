@@ -3,12 +3,22 @@ const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
+const tabBtn = document.getElementById("tab-btn");
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myPins"));
 
 if (leadsFromLocalStorage) {
     myPins = leadsFromLocalStorage;
     render(myPins);
 }
+
+tabBtn.addEventListener("click", function(){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        console.log(tabs);
+        myPins.push(tabs[0].url);
+        localStorage.setItem("myPins", JSON.stringify(myPins));
+        render(myPins);
+    });
+})
 
 function render(pins) {
     let listItems = ""
