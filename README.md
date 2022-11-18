@@ -26,7 +26,7 @@ This is my solution to a course project at Scrimba [JavaScript course](https://s
 - Live Site URL: [Link](https://preeminent-starship-7952bf.netlify.app/)
 
 ### Demo
-(⌛ please wait for complete loading if not shown yet)
+(Click on the GIF if the quality seems low)
 ![demo gif](./demo.gif)
 
 ### Screenshot
