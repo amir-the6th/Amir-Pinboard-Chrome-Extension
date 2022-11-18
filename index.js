@@ -11,21 +11,12 @@ if (leadsFromLocalStorage) {
     render(myPins);
 }
 
-tabBtn.addEventListener("click", function(){
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        console.log(tabs);
-        myPins.push(tabs[0].url);
-        localStorage.setItem("myPins", JSON.stringify(myPins));
-        render(myPins);
-    });
-})
-
 function render(pins) {
     let listItems = ""
     for (let i = 0; i < pins.length; i++) {
         listItems += `
             <li>
-                <a target='_blank' href='https://${pins[i]}'>
+                <a target='_blank' href='${pins[i]}'>
                     ${pins[i]}
                 </a>
             </li>
@@ -39,6 +30,15 @@ inputBtn.addEventListener("click", function() {
     inputEl.value = ""
     localStorage.setItem("myPins", JSON.stringify(myPins));
     render(myPins)
+})
+
+tabBtn.addEventListener("click", function(){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        console.log(tabs);
+        myPins.push(tabs[0].url);
+        localStorage.setItem("myPins", JSON.stringify(myPins));
+        render(myPins);
+    });
 })
 
 deleteBtn.addEventListener("dblclick", function() {
